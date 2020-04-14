@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
+    public bool isExplored = false;
+    public Waypoint exploredFrom;
+
     [SerializeField] [Range(1f, 20f)] const int GridSize = 10;
     [SerializeField] [Range(1f, 20f)] const int GridLimitsSize = 10;
     Vector2 gridPos;
@@ -18,9 +21,9 @@ public class Waypoint : MonoBehaviour
     {
         Vector2Int snapPos = new Vector2Int();
         snapPos.x = Mathf.RoundToInt(transform.position.x / GridSize) ;
-        snapPos.x = Mathf.Clamp(snapPos.x, 0, GridLimitsSize * GridSize);
+        //snapPos.x = Mathf.Clamp(snapPos.x, 0, GridLimitsSize * GridSize);
         snapPos.y = Mathf.RoundToInt(transform.position.z / GridSize) ;
-        snapPos.y = Mathf.Clamp(snapPos.y, 0, GridLimitsSize * GridSize);
+        //snapPos.y = Mathf.Clamp(snapPos.y, 0, GridLimitsSize * GridSize);
         return snapPos;
 
     }
