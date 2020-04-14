@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-
+    
     [SerializeField]Transform objectToPan;
-    [SerializeField] Transform targetEnemy;
+    [SerializeField] Enemy targetEnemy;
     [SerializeField] Transform shootPosition;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float fireRate;
@@ -16,14 +17,17 @@ public class Tower : MonoBehaviour
     [SerializeField] float bulletSpeed;
 
     bool IsAbleToShoot = true;
+    
 
+   
     // Update is called once per frame
     void Update()
     {
+        targetEnemy = EnemySpawner.instance.SceneEnemies.OrderBy(x => (x.transform.position - transform.position).magnitude).FirstOrDefault();
         if (targetEnemy != null)
         {
-            LookAt(targetEnemy);
-            float enemyDistance = (transform.position - targetEnemy.position).magnitude;
+            LookAt(targetEnemy.transform);
+            float enemyDistance = (transform.position - targetEnemy.transform.position).magnitude;
             if(IsAbleToShoot && enemyDistance < fireRange)
             {
                 bulletSpeed = enemyDistance;

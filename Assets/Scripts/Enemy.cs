@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        EnemySpawner.instance.SceneEnemies.Remove(this);
         Destroy(this.gameObject);
     }
 }
