@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitPoints: 3
+  hitParticle: {fileID: 0}
+  DeathParticle: {fileID: 0}
+  movementPeriod: 0.75
 --- !u!54 &4257915146453242772
 Rigidbody:
   m_ObjectHideFlags: 0

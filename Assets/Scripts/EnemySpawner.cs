@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int enemiesToSpawn;
     [SerializeField] float secondsBetweenSpawns;
     [SerializeField] Enemy EnemyPrefab;
+    [SerializeField] Text SpawnedEnemies;
+    [SerializeField] AudioClip spawnEnemySFX;
+
+    private int score = 0;
 
     public static EnemySpawner instance;
     public List<Enemy> SceneEnemies;
@@ -24,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Destroy(this);
         }
+        SpawnedEnemies.text = score.ToString(); 
         SceneEnemies = new List<Enemy>();
         StartCoroutine(SpawnEnemies());
     }
@@ -32,8 +38,11 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
+            GetComponent<AudioSource>().PlayOneShot(spawnEnemySFX);
             Enemy enemy = Instantiate(EnemyPrefab, transform);
             SceneEnemies.Add(enemy);
+            score++;
+            SpawnedEnemies.text = score.ToString();
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }
     }
