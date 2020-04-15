@@ -81,6 +81,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5851818810948503197, guid: 80c2d384bd0ed2248bd5056743d0cf71,
     type: 3}
   fireRate: 1
+  fireRange: 16
+  VisualizeRange: 0
   bulletSpeed: 10
 --- !u!1001 &4677748884393507617
 PrefabInstance:

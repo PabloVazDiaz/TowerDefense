@@ -5,12 +5,21 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
+
     public bool isExplored = false;
     public Waypoint exploredFrom;
-
+    public bool turretPlaceable = true;
+    
     [SerializeField] [Range(1f, 20f)] const int GridSize = 10;
     [SerializeField] [Range(1f, 20f)] const int GridLimitsSize = 10;
     Vector2 gridPos;
+
+    private TowerFactory towerFactory;
+
+    private void Start()
+    {
+        towerFactory = FindObjectOfType<TowerFactory>();
+    }
 
     public int GetGridSize()
     {
@@ -39,16 +48,13 @@ public class Waypoint : MonoBehaviour
         topMeshRenderer.material.color = color;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnMouseOver()
     {
-        
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Input.GetMouseButtonDown(0))
+            if (turretPlaceable)
+            {
+                towerFactory.AddTurret(this);
+            }
+           
     }
 }

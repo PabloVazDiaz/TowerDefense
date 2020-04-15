@@ -43,7 +43,8 @@ public class CubeEditor : MonoBehaviour
     {
         TextMesh textLabel = GetComponentInChildren<TextMesh>();
         string LabelText = $"{snapPos.x / GridSize } , {snapPos.y / GridSize }";
-        textLabel.text = LabelText;
+        if (textLabel != null) 
+            textLabel.text = LabelText;
         gameObject.name = $"Cube {LabelText}";
     }
 

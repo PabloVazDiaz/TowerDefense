@@ -16,6 +16,8 @@ public class Tower : MonoBehaviour
     [SerializeField] bool VisualizeRange;
     [SerializeField] float bulletSpeed;
 
+    public Waypoint baseWaypoint;
+
     bool IsAbleToShoot = true;
     
 
@@ -42,6 +44,7 @@ public class Tower : MonoBehaviour
         IsAbleToShoot = false;
         GameObject go = Instantiate(bulletPrefab, shootPosition.position, shootPosition.rotation);
         go.transform.parent = null;
+        Destroy(go, 5f);
         go.GetComponent<Rigidbody>().AddForce(go.transform.forward * bulletSpeed / Time.deltaTime);
         yield return new WaitForSeconds(1 / fireRate);
         IsAbleToShoot = true;

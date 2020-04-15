@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField]int HitPoints;
+    [SerializeField] ParticleSystem hitParticle;
+    [SerializeField] ParticleSystem DeathParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour
     private void GetDamaged()
     {
         HitPoints--;
+        hitParticle.Play();
         if (HitPoints <= 0)
         {
             Die();
@@ -51,6 +54,8 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemySpawner.instance.SceneEnemies.Remove(this);
+        ParticleSystem ps = Instantiate(DeathParticle, transform.position, Quaternion.identity);
+        Destroy(ps.gameObject, ps.main.duration);
         Destroy(this.gameObject);
     }
 }
